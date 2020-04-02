@@ -1,7 +1,8 @@
 # spring-boot-ci-example
+
 Spring Boot concourse CI example.
 
-## How to?
+## How to use this repo
 
 - Step 1: Start a new Spring Boot project
 
