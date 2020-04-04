@@ -14,4 +14,4 @@ inputs:
 
 # 测试运行的实际文件
 run:
-  path: git-repo-test/ci/scripts/run-unit-tests.sh
+  path: spring-boot-example/ci/scripts/run-unit-tests.sh
