@@ -6,9 +6,9 @@ image_resource:
     repository: dev-harbor.teyixing.com/public/gradle
     tag: 6.3.0-jdk11
 inputs:
-- name: spring-boot-example
+- name: spring-boot-ci-example
 outputs:
 - name: artifacts
 
 run:
-  path: spring-boot-example/ci/scripts/build.sh
+  path: spring-boot-ci-example/ci/scripts/build.sh

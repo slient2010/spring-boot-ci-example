@@ -13,8 +13,8 @@ image_resource:
 
 # 由前面resources输入的信息
 inputs:
-- name: spring-boot-example
+- name: spring-boot-ci-example
 
 # 测试运行的实际文件
 run:
-  path: spring-boot-example/ci/scripts/run-unit-tests.sh
+  path: spring-boot-ci-example/ci/scripts/run-unit-tests.sh

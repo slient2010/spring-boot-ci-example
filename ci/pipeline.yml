@@ -1,6 +1,6 @@
 ---
 resources:
-- name: spring-boot-example
+- name: spring-boot-ci-example
   type: git
   source:
     branch: master
@@ -11,20 +11,20 @@ jobs:
   public: true
   plan:
     # 从resources中获取文件等资源
-    - get: spring-boot-example
+    - get: spring-boot-ci-example
       # 设置为true时，无论何时提交代码都会运行测试
       trigger: true
     - task: Run Unit Tests
-      file: spring-boot-example/ci/task-run-tests.yml
+      file: spring-boot-ci-example/ci/task-run-tests.yml
 
 # 构建任务
 - name: Build
   # 是否公开可见任务
   public: true
   plan:
-    - get: spring-boot-example
+    - get: spring-boot-ci-example
       passed: [Unit Tests]
       trigger: true
     # 具体构建任务
     - task: Build Code
-      file: spring-boot-example/ci/task-build.yml
+      file: spring-boot-ci-example/ci/task-build.yml
