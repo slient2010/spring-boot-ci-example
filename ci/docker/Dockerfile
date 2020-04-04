@@ -1,0 +1,8 @@
+FROM dev-harbor.teyixing.com/public/java:11.0.3
+
+# 需要变量
+ADD /spring-boot-example/build/libs/spring-boot-ci-example-0.0.1-SNAPSHOT.jar /spring-boot-ci-example-0.0.1-SNAPSHOT.jar
+
+ENV NAME=world
+
+ENTRYPOINT ["java", "-Djava.awt.headless=true", "-D-Xmx256m","-jar","/spring-boot-ci-example-0.0.1-SNAPSHOT.jar"]

@@ -1,0 +1,51 @@
+---
+resources:
+- name: spring-boot-example
+  type: git
+  source:
+    branch: master
+    uri: https://github.com/slient2010/spring-boot-ci-example.git
+    username: ((gitusername))
+    password: ((gitpass))
+
+
+- name: build-docker-image
+  type: docker-image
+  source:
+    email: ((email))
+    username: ((username))
+    password: ((password))
+    repository: ((repo))/public/spring-boot-example
+
+jobs:
+- name: Unit Tests
+  public: true
+  plan:
+    # 从resources中获取文件等资源
+    - get: spring-boot-example
+      # 设置为true时，无论何时提交代码都会运行测试
+      trigger: true
+    - task: Run Unit Tests
+      file: spring-boot-ci-example/ci/task-run-tests.yml
+
+# 构建任务
+- name: Build
+  # 是否公开可见任务
+  public: true
+  plan:
+    - get: spring-boot-example
+      passed: [Unit Tests]
+      trigger: true
+    # 具体构建任务
+    - task: Build Code
+      file: spring-boot-ci-example/ci/task-build.yml
+
+# 发布到仓库
+- name: publish
+  public: true
+  serial: true
+  plan:
+  - get: spring-boot-example
+  - put: build-docker-image
+    params:
+      build: spring-boot-ci-example/ci/docker
