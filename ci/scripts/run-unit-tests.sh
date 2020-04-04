@@ -1,5 +1,5 @@
 #!/bin/bash
-cd spring-boot-example
+cd spring-boot-ci-example
 
 java -version 
 
