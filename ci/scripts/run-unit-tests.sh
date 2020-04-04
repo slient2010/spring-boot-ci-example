@@ -1,7 +1,7 @@
 #!/bin/bash
 cd spring-boot-example
 
-java --version 
+java -version 
 
 gradle version
 
