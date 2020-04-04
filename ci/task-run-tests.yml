@@ -8,7 +8,7 @@ image_resource:
   # 仓库信息
   # source: {repository: frekele/gradle}
   source: 
-    repository: gradle
+    repository: dev-harbor.teyixing.com/public/gradle
     tag: 6.3.0-jdk11
 
 # 由前面resources输入的信息
