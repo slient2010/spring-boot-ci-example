@@ -7,7 +7,7 @@ image_resource:
   type: docker-image
   # 仓库信息
   # source: {repository: frekele/gradle}
-  source: {repository: gradle:6.3.0-jdk11}
+  source: {repository: gradle/6.3.0-jdk11}
 
 # 由前面resources输入的信息
 inputs:
