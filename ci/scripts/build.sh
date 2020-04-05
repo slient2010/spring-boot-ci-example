@@ -4,7 +4,7 @@ gradle clean assemble
 pwd
 ls build/libs/
 # cp build/libs/*.jar ../artifacts/
-cp build/libs/*.jar spring-boot-ci-example/
+cp build/libs/*.jar spring-boot-ci-example
 cat << EOF > Dockerfile
 
 FROM dev-harbor.teyixing.com/public/java:11.0.3
