@@ -40,18 +40,15 @@ jobs:
     # 具体构建任务
     - task: Build Code
       file: spring-boot-ci-example/ci/task-build.yml
+
+# 发布到仓库
+- name: publish
+  public: true
+  serial: true
+  plan:
+    - get: spring-boot-ci-example
+      passed: [Build]
+      trigger: true
     - put: build-docker-image
       params:
         build: spring-boot-ci-example/ci/docker
-
-# 发布到仓库
-# - name: publish
-#   public: true
-#   serial: true
-#   plan:
-#     - get: spring-boot-ci-example
-#       passed: [Build]
-#       trigger: true
-#     - put: build-docker-image
-#       params:
-#         build: spring-boot-ci-example/ci/docker

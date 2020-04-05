@@ -8,7 +8,7 @@ image_resource:
 inputs:
 - name: spring-boot-ci-example
 outputs:
-- name: artifacts
+- name: spring-boot-ci-example
 
 run:
   path: spring-boot-ci-example/ci/scripts/build.sh
