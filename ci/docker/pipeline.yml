@@ -42,7 +42,8 @@ jobs:
       file: spring-boot-ci-example/ci/task-build.yml
     - put: build-docker-image
       params:
-        build: spring-boot-ci-example/ci/docker
+        # build: spring-boot-ci-example/ci/docker
+        build: spring-boot-ci-example
 
 # # 发布到仓库
 # - name: publish
