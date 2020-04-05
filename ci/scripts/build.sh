@@ -1,6 +1,8 @@
 #!/bin/bash
 cd spring-boot-ci-example
 gradle clean assemble
+pwd
+ls build/libs/
 # cp build/libs/*.jar ../artifacts/
 cat << EOF > Dockerfile
 
