@@ -46,7 +46,7 @@ jobs:
   public: true
   serial: true
   plan:
-  - get: spring-boot-ci-example
+  - input: spring-boot-ci-example
   - put: build-docker-image
     params:
       build: spring-boot-ci-example/ci/docker
