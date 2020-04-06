@@ -9,13 +9,13 @@ resources:
     password: ((gitpass))
 
 
-- name: build-docker-image
-  type: docker-image
-  source:
-    email: ((email))
-    username: ((username))
-    password: ((password))
-    repository: ((repo))/public/spring-boot-ci-example
+# - name: build-docker-image
+#   type: docker-image
+#   source:
+#     email: ((email))
+#     username: ((username))
+#     password: ((password))
+#     repository: ((repo))/public/spring-boot-ci-example
 
 jobs:
 - name: Unit Tests
@@ -40,10 +40,28 @@ jobs:
     # 具体构建任务
     - task: Build Code
       file: spring-boot-ci-example/ci/task-build.yml
-    - put: build-docker-image
-      params:
-        # build: spring-boot-ci-example/ci/docker
-        build: spring-boot-ci-example
+
+
+    - task: show-some-files
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source: {repository: busybox}
+
+        inputs:
+          - name: spring-boot-ci-example
+          - name: spring-boot-ci-example
+
+        run:
+          path: ls
+          args: ['.']
+
+    # - task: show files
+    #   config:
+    #   - put: build-docker-image
+    #     params:
+    #       build: spring-boot-ci-example
 
 # # 发布到仓库
 # - name: publish
