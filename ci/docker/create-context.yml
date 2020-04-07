@@ -1,15 +1,12 @@
 platform: linux
-
-# image: docker:///busybox
-
 image_resource:
   type: docker-image
   source: 
-    repository: ['busybox']
+    repository: busybox
 
 inputs:
-- name: spring-boot-ci-example
 - name: docker-builds-binaries
+  # - name: spring-boot-ci-example
 
 outputs:
 - name: context
