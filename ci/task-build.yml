@@ -5,10 +5,13 @@ image_resource:
   source: 
     repository: dev-harbor.teyixing.com/public/gradle
     tag: 6.3.0-jdk11
+
 inputs:
   - name: spring-boot-ci-example
+
+# 输出目录
 outputs:
-  - name: spring-boot-ci-example
+  - name: docker-builds
 
 run:
   path: spring-boot-ci-example/ci/scripts/build.sh

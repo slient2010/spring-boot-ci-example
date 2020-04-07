@@ -40,6 +40,11 @@ jobs:
     # 具体构建任务
     - task: Build Code
       file: spring-boot-ci-example/ci/task-build.yml
+    - task: create-context
+      file: spring-boot-ci-example/ci/docker/create-context.yml
+    - put: build-docker-image
+      params:
+        build: context
 
 
     # - task: show-some-files
@@ -62,9 +67,6 @@ jobs:
     # - get: spring-boot-ci-example
     #   passed: [Build]
     #   trigger: true
-    - put: build-docker-image
-      params:
-        build: spring-boot-ci-example/ci/docker
 
     # - task: show files
     #   config:
