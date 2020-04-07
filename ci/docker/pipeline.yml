@@ -60,14 +60,13 @@ jobs:
             output_dir=docker-builds-binaries
             cd spring-boot-ci-example
             gradle clean assemble
-  
             cat << EOF > "${output_dir}/Dockerfile"
             FROM dev-harbor.teyixing.com/public/java:11.0.3
             ADD ${outputs_dir}/spring-boot-ci-example-0.0.1-SNAPSHOT.jar /spring-boot-ci-example-0.0.1-SNAPSHOT.jar
             ENTRYPOINT ["java", "-Djava.awt.headless=true", "-D-Xmx256m","-jar","/spring-boot-ci-example-0.0.1-SNAPSHOT.jar"]
             EOF
-  
             cp -R ./build/libs/  "${output_dir}/flight-school"
+            ls "${output_dir}/flight-school"
 
     - put: build-docker-image
       params:
