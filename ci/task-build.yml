@@ -11,7 +11,7 @@ inputs:
 
 # 输出目录
 outputs:
-  - name: docker-builds
+  - name: docker-builds-binaries
 
 run:
   path: spring-boot-ci-example/ci/scripts/build.sh
