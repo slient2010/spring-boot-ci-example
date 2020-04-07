@@ -8,7 +8,7 @@ image_resource:
     repository: ['busybox']
 
 inputs:
-- name: code
+- name: spring-boot-ci-example
 - name: docker-builds-binaries
 
 outputs:
