@@ -6,7 +6,7 @@ image_resource:
 
 inputs:
 - name: docker-builds-binaries
-  # - name: spring-boot-ci-example
+- name: spring-boot-ci-example
 
 outputs:
 - name: context
