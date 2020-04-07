@@ -42,20 +42,22 @@ jobs:
       file: spring-boot-ci-example/ci/task-build.yml
 
 
-    - task: show-some-files
-      config:
-        platform: linux
-        image_resource:
-          type: docker-image
-          source: {repository: busybox}
+    # - task: show-some-files
+    #   config:
+    #     platform: linux
+    #     image_resource:
+    #       type: docker-image
+    #       source: {repository: busybox}
 
-        inputs:
-          - name: spring-boot-ci-example
-          - name: spring-boot-ci-example
+    #     inputs:
+    #       - name: spring-boot-ci-example
+    #       - name: spring-boot-ci-example
 
-        run:
-          path: ls
-          args: ['spring-boot-ci-example/build/libs']
+    #     run:
+    #       path: ls
+    #       args: ['spring-boot-ci-example/build/libs']
+
+
     # build docker image
     # - get: spring-boot-ci-example
     #   passed: [Build]
