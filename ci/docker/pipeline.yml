@@ -9,13 +9,13 @@ resources:
     password: ((gitpass))
 
 
-# - name: build-docker-image
-#   type: docker-image
-#   source:
-#     email: ((email))
-#     username: ((username))
-#     password: ((password))
-#     repository: ((repo))/public/spring-boot-ci-example
+- name: build-docker-image
+  type: docker-image
+  source:
+    email: ((email))
+    username: ((username))
+    password: ((password))
+    repository: ((repo))/public/spring-boot-ci-example
 
 jobs:
 - name: Unit Tests
@@ -55,7 +55,14 @@ jobs:
 
         run:
           path: ls
-          args: ['.']
+          args: ['spring-boot-ci-example/build/libs']
+    # build docker image
+    # - get: spring-boot-ci-example
+    #   passed: [Build]
+    #   trigger: true
+    - put: build-docker-image
+      params:
+        build: spring-boot-ci-example/ci/docker
 
     # - task: show files
     #   config:
