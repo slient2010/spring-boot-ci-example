@@ -39,7 +39,22 @@ jobs:
       trigger: true
     # 具体构建任务
     - task: Build Code
-      file: spring-boot-ci-example/ci/task-build.yml
+      # file: spring-boot-ci-example/ci/task-build.yml
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source: 
+            repository: dev-harbor.teyixing.com/public/gradle
+            tag: 6.3.0-jdk11
+        inputs:
+          - name: spring-boot-ci-example
+        # 输出目录
+        outputs:
+          - name: docker-builds-binaries
+        run:
+          path: spring-boot-ci-example/ci/scripts/build.sh
+
     - task: create-context
       file: spring-boot-ci-example/ci/docker/create-context.yml
     - put: build-docker-image
