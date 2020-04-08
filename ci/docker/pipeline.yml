@@ -3,7 +3,7 @@ resources:
 - name: spring-boot-ci-example
   type: git
   source:
-    branch: master
+    branch: stable
     uri: https://github.com/slient2010/spring-boot-ci-example.git
     username: ((gitusername))
     password: ((gitpass))
@@ -17,99 +17,49 @@ resources:
     password: ((password))
     repository: ((repo))/public/spring-boot-ci-example
 
-jobs:
-- name: Unit Tests
-  public: true
-  plan:
-    # 从resources中获取文件等资源
-    - get: spring-boot-ci-example
-      # 设置为true时，无论何时提交代码都会运行测试
-      trigger: true
-    - task: Run Unit Tests
-      # spring-boot-ci-example 为resource中定义的名称
-      file: spring-boot-ci-example/ci/task-run-tests.yml
-
 # 构建任务
+jobs:
 - name: Build
   # 是否公开可见任务
   public: true
   plan:
     - get: spring-boot-ci-example
-      passed: [Unit Tests]
+      # passed: [Unit Tests]
       trigger: true
     # 具体构建任务
     - task: Build Code
-      # file: spring-boot-ci-example/ci/task-build.yml
-      config:
-        platform: linux
-        image_resource:
-          type: docker-image
-          source: 
-            repository: dev-harbor.teyixing.com/public/gradle
-            tag: 6.3.0-jdk11
-        inputs:
-          - name: spring-boot-ci-example
-        # 输出目录
-        outputs:
-          - name: docker-builds-binaries
+      file: spring-boot-ci-example/ci/task-build.yml
+      # config:
+      #   platform: linux
+      #   image_resource:
+      #     type: docker-image
+      #     source: 
+      #       repository: dev-harbor.teyixing.com/public/gradle
+      #       tag: 6.3.0-jdk11
+      #   inputs:
+      #     - name: spring-boot-ci-example
+      #   # 输出目录
+      #   outputs:
+      #     - name: docker-builds-binaries
 
-        run:
-          path: /bin/bash
-          args:
-          - -c
-          - |
-            output_dir=docker-builds-binaries
-            ls .
-            cd spring-boot-ci-example
-            gradle clean assemble
-            cat << EOF > "../${output_dir}/Dockerfile"
-            FROM dev-harbor.teyixing.com/public/java:11.0.3
-            ADD ${outputs_dir}/libs/spring-boot-ci-example-0.0.1-SNAPSHOT.jar /spring-boot-ci-example-0.0.1-SNAPSHOT.jar
-            ENTRYPOINT ["java", "-Djava.awt.headless=true", "-D-Xmx256m","-jar","/spring-boot-ci-example-0.0.1-SNAPSHOT.jar"]
-            EOF
-            cp -R ./build/libs/  "../${output_dir}"
-            ls "../${output_dir}"
+      #   run:
+      #     path: /bin/bash
+      #     args:
+      #     - -c
+      #     - |
+      #       output_dir=docker-builds-binaries
+      #       ls .
+      #       cd spring-boot-ci-example
+      #       gradle clean assemble
+      #       cat << EOF > "../${output_dir}/Dockerfile"
+      #       FROM dev-harbor.teyixing.com/public/java:11.0.3
+      #       ADD ${outputs_dir}/libs/spring-boot-ci-example-0.0.1-SNAPSHOT.jar /spring-boot-ci-example-0.0.1-SNAPSHOT.jar
+      #       ENTRYPOINT ["java", "-Djava.awt.headless=true", "-D-Xmx256m","-jar","/spring-boot-ci-example-0.0.1-SNAPSHOT.jar"]
+      #       EOF
+      #       cp -R ./build/libs/  "../${output_dir}"
+      #       ls "../${output_dir}"
 
+    # 创建镜像
     - put: build-docker-image
       params:
         build: docker-builds-binaries
-
-
-    # - task: show-some-files
-    #   config:
-    #     platform: linux
-    #     image_resource:
-    #       type: docker-image
-    #       source: {repository: busybox}
-
-    #     inputs:
-    #       - name: spring-boot-ci-example
-    #       - name: spring-boot-ci-example
-
-    #     run:
-    #       path: ls
-    #       args: ['spring-boot-ci-example/build/libs']
-
-
-    # build docker image
-    # - get: spring-boot-ci-example
-    #   passed: [Build]
-    #   trigger: true
-
-    # - task: show files
-    #   config:
-    #   - put: build-docker-image
-    #     params:
-    #       build: spring-boot-ci-example
-
-# # 发布到仓库
-# - name: publish
-#   public: true
-#   serial: true
-#   plan:
-#     - get: spring-boot-ci-example
-#       passed: [Build]
-#       trigger: true
-#     - put: build-docker-image
-#       params:
-#         build: spring-boot-ci-example/ci/docker
