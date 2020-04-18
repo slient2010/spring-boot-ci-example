@@ -1,7 +1,7 @@
 #!/bin/bash
 cd spring-boot-ci-example
 ls .
-gradle clean assemble
+./gradlew clean assemble
 pwd
 ls build/libs/
 # mkdir docker-builds-binaries
