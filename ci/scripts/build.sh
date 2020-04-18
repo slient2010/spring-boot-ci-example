@@ -1,6 +1,6 @@
 #!/bin/bash
 ls .
-./gradlew clean assemble
+gradle clean assemble
 pwd
 ls build/libs/
 # mkdir docker-builds-binaries
