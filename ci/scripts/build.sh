@@ -1,5 +1,4 @@
 #!/bin/bash
-cd spring-boot-ci-example
 ls .
 gradle clean assemble
 pwd
