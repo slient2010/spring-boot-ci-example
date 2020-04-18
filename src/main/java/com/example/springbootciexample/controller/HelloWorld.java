@@ -8,8 +8,6 @@ import java.util.Date;
 
 @RestController
 public class HelloWorld {
-    // @RequestMapping("/",method=RequestMethod.GET)
-    @RequestMapping(value={"", "/", "welcome"})}
     @RequestMapping(value="/", method=RequestMethod.GET)
     public String sayHi(){
         //修改返回的字符串的内容
