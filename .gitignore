@@ -32,3 +32,9 @@ build
 token*
 
 *.swp
+
+.classpath
+.project
+.settings
+bin
+
