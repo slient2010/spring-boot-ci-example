@@ -9,3 +9,5 @@ Spring Boot concourse CI example.
   Use [https://start.spring.io/](https://start.spring.io/) to create a “web” project.
 
 - Step 2: Create concourse ci files
+
+- Step 3: test
